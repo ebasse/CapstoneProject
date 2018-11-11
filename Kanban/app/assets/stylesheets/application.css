@@ -13,4 +13,12 @@
  *= require_tree .
  *= require_self
  */
- 
+ /*.taskBox{*/
+ /* position:absolute;*/
+ /*     float: left;*/
+ /*   width: 50px;*/
+ /*   margin-left: 10px;*/
+ /*   margin-top: 10px;*/
+ /*   padding: 5px;*/
+ /*   border: 2px solid black;*/
+ /*}*/
