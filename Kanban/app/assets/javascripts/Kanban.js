@@ -16,11 +16,11 @@ var isDown = false;
 
 div = document.createElement("div");
 div.style.position = "absolute";
-div.style.left = "0px";
-div.style.top = "0px";
+div.style.left = "15px";
+div.style.top = "582px";
 div.style.width = "100px";
 div.style.height = "100px";
-div.style.background = "red";
+div.style.background = "yellow";
 div.style.color = "blue";
 
 document.body.appendChild(div);
