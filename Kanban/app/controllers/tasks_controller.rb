@@ -10,10 +10,12 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @board = Board.find(params[:board_id])
   end
 
   # GET /tasks/new
   def new
+    @board = Board.find(params[:board_id])
     @task = Task.new
   end
 
@@ -24,8 +26,10 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
-
+    @board = Board.find(params[:board_id])
+    @task = @board.tasks.create(task_params)
+    redirect_to board_path(@board)
+=begin
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
@@ -35,11 +39,13 @@ class TasksController < ApplicationController
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
+=end
   end
 
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @board = Board.find(params[:board_id])
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
@@ -54,9 +60,10 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
+    @board = Board.find(params[:board_id])
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to @board, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

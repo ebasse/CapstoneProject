@@ -12,9 +12,9 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', board_task_path(task.board_id, task.id) %></td>
+        <td><%= link_to 'Edit', edit_board_task_path(task.board_id, task.id) %></td>
+        <td><%= link_to 'Destroy', board_task_path(task.board_id, task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
+<%= link_to 'New Task', new_board_task_path %>
