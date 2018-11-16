@@ -1,0 +1,39 @@
+.title{
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#board{
+    top: 25%;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+
+.column{
+    font-size: 28px;
+    font-weight: bold;
+    width:20%; 
+    height:100%; 
+    padding-top: 10px;
+    text-align: center; 
+    border:1px solid #000;
+    position:absolute;
+}
+
+#backlog{
+    margin-left: 0%;
+}
+#toDo{
+    margin-left: 20%;
+}
+#inProgress{
+    margin-left: 40%;
+}
+#testing{
+    margin-left: 60%;
+}
+#complete{
+    margin-left: 80%;
+}

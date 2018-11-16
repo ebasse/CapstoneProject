@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2018_10_30_233457) do
     t.string "name"
     t.text "description"
     t.integer "progress"
-    t.integer "x"
-    t.integer "y"
+    t.float "x"
+    t.float "y"
     t.integer "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

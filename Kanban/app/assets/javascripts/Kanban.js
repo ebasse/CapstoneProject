@@ -8,8 +8,8 @@
 function newTaskFunction(x,y,id_num, taskInfo) {
     
   if (x==-1){
-      x = 15;
-      y = 582;
+      x = 10;
+      y = 20;
   }
   var mousePosition;
 var offset = [0,0];
@@ -19,17 +19,17 @@ var wasDragged = false;
 
 div = document.createElement("div");
 div.style.position = "absolute";
-div.style.left = x + "px";
-div.style.top = y + "px";
+div.style.left = x + "%";
+div.style.top = y + "%";
 div.style.width = "100px";
 div.style.height = "100px";
 div.style.background = "yellow";
 div.style.color = "blue";
 div.setAttribute("id",id_num);
 div.innerHTML = taskInfo; 
+div.style.zIndex = 10;
 //window.alert(id_num.toString());
-
-document.body.appendChild(div);
+document.getElementById("board").appendChild(div);
 
 div.addEventListener('click', function(e) {
     if (wasDragged === false){
@@ -77,7 +77,7 @@ document.addEventListener('mouseup', function() {
                     type: "post",
                     url: "/tasks/update_pos",
                     dataType: "text",
-                    data: {newX: parseInt(div.style.left,10), newY: parseInt(div.style.top, 10), id: id_num},
+                    data: {newX: parseFloat(div.style.left), newY: parseFloat(div.style.top), id: id_num},
                     success: function(exception){}, 
                     error: function(exception){alert("Unable to save new position!");}
                     });
@@ -98,9 +98,46 @@ document.addEventListener('mousemove', function(event) {
             y : event.clientY
 
         };
-        div.style.left = (mousePosition.x + offset[0]) + 'px';
-        div.style.top  = (mousePosition.y + offset[1]) + 'px';
+        div.style.left = (((mousePosition.x + offset[0])/window.innerWidth)*100) + '%';
+        div.style.top  = (((mousePosition.y + offset[1])/window.innerHeight)*100) + '%';
+        //alert((document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100);
+        //alert(div.style.top);
+        if (parseFloat(div.style.top) < parseFloat((document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100)){
+            div.style.top = (document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100 + '%';
+        }
     }
 }, true);
+
+window.setInterval(
+    function(){
+        
+        if (isDown == false && wasDragged == false){
+            jQuery.ajax({
+            type: "get",
+            url: "/tasks/get_pos",
+            dataType: "json",
+            data: {id: id_num},
+            success: function(json){
+                div.style.left=json.new_x +'%';
+                div.style.top = json.new_y + '%';
+            },
+            error: function(exception){
+            }
+        });
+            if (parseFloat(div.style.top) < parseFloat((document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100)){
+                div.style.top = (document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100 + '%';
+            }
+        }
+        else{
+            jQuery.ajax({
+                    type: "post",
+                    url: "/tasks/update_pos",
+                    dataType: "text",
+                    data: {newX: parseFloat(div.style.left), newY: parseFloat(div.style.top), id: id_num},
+                    success: function(exception){}, 
+                    error: function(exception){alert("Unable to save new position!");}
+                    });
+        }
+    }, 300);
 }
 //dragElement(document.getElementById("taskBox"));

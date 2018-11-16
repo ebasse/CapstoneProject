@@ -70,6 +70,6 @@ class BoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.fetch(:board, {})
+      params.require(:board).permit(:name, :description)
     end
 end

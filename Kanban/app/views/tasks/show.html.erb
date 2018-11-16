@@ -1,11 +1,14 @@
 <p id="notice"><%= notice %></p>
-
-Name of Task: <br>
-<%= @task.name %>
+<div class = "centerTitle">Name of Task: </div>
 <br>
-Description of Task: <br>
-<%= @task.description %> <br>
-
+<div class = "centerText"><%= @task.name %></div>
+<br>
+<div class = "centerTitle">Description of Task:</div> 
+<br>
+<div class = "centerText"><%= @task.description %></div> 
+<br>
+<div class = "centerText">
 <%= link_to 'Edit', edit_board_task_path(@task) %> |
-<%= link_to 'Destroy', board_task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
-<%= link_to 'Back', board_tasks_path %>
+<%= link_to 'Destroy', board_task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', board_path(@board) %>
+</div>

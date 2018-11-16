@@ -1,12 +1,17 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div class = "title"><%= @board.name %></div>
 <p id="notice"><%= notice %></p>
-
+<div class = "center">
 <%= link_to 'Edit', edit_board_path(@board) %> |
 <%= link_to 'Back', boards_path %>
-<%= link_to 'AddRealTask', board_tasks_path(@board) %>
-
-<br>
 <%= button_to "New Task", new_board_task_path(@board), :method => "get" %>
+</div>
+<br>
+
 <!--<button onclick="newTaskFunction(-1,-1,5)" type="button">New Task</button> -->
 <br>
 
@@ -16,21 +21,39 @@
 <!--<div style="width:225px; height:600px; float: left; padding-top: 10px; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">In Progress</div>
 <!--<div style="width:225px; height:600px; float: left; padding-top: 10px; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Testing</div>
 <!--<div style="width:225px; height:600px; float: left; padding-top: 10px; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Complete</div>!-->
-<div style="width:225px; height:600px; padding-top: 10px; margin-left: 0%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Backlog</div>
+<!--<div style="width:225px; height:600px; padding-top: 10px; margin-left: 0%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Backlog</div>
 <div style="width:225px; height:600px;  padding-top: 10px;margin-left: 20%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">To Do</div>
 <div style="width:225px; height:600px; padding-top: 10px;margin-left: 40%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">In Progress</div>
 <div style="width:225px; height:600px; padding-top: 10px;margin-left: 60%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Testing</div>
 <div style="width:225px; height:600px;  padding-top: 10px;margin-left: 80%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Complete</div>
+!-->
 
+<!--
+The styles below work independent of resolution
+<div style="width:20%; height:100%; padding-top: 10px; margin-left: 0%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Backlog</div>
+<div style="width:20%; height:100%;  padding-top: 10px;margin-left: 20%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">To Do</div>
+<div style="width:20%; height:100%; padding-top: 10px;margin-left: 40%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">In Progress</div>
+<div style="width:20%; height:100%; padding-top: 10px;margin-left: 60%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Testing</div>
+<div style="width:20%; height:100%;  padding-top: 10px;margin-left: 80%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Complete</div>
+!-->
+<div id= "board">
+    <script>
+        <% @board.tasks.each do |item| %>
+                newTaskFunction(<%=item.x%>,<%=item.y%>,<%=item.id%>, "<%=item.name%>")
+        <% end%>
+    
+    </script>
+    <div id = "backlog" class = "column">Backlog</div>
+    <div id = "toDo" class = "column">To Do</div>
+    <div id = "inProgress" class = "column">In Progress</div>
+    <div id = "testing" class = "column">Testing</div>
+    <div id = "complete" class = "column">Complete</div>
+</div>
 
 <!-- The following snippet demonstrates creating tasks through iteration, each with a different position -->
-<script>
-    <% @board.tasks.each do |item| %>
-            newTaskFunction(<%=item.x%>,<%=item.y%>,<%=item.id%>, "<%=item.name%>")
-    <% end%>
-    
-</script>
 
+</body>
+</html>
 
 
 <!--  websites for drag/drop help 

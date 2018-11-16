@@ -36,7 +36,9 @@ gem 'json'
 
 gem 'draggable-rails'
 
+gem 'bootstrap-sass'
 gem 'bootstrap'
+gem 'responders'
 
 gem 'jquery-rails'
 

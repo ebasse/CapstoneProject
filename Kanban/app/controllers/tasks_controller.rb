@@ -81,7 +81,16 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  def get_pos
+    @task = Task.find(params[:id])
+    ret = {"new_x" => @task.x, "new_y" => @task.y}
+    respond_to do |format|
+      format.html
+      format.json {render json: ret}
+    end
+  end
+  
   def update_pos
     @task = Task.find(params[:id])
     @task.update_attributes(:x => params[:newX], :y => params[:newY])
