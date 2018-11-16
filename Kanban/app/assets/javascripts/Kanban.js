@@ -1,55 +1,12 @@
+
 //import {Sortable, Plugins} from '@shopify/draggable';
+//= require jquery
+//= require jquery_ujs
+//import Rails from 'rails.ujs';
+//Rails.start();
 
-
-/*
-// Following taken from https://stackoverflow.com/questions/12572644/differentiate-click-vs-mousedown-mouseup 
-// Timeout, started on mousedown, triggers the beginning of a hold
-var holdStarter = null;
-// Milliseconds to wait before recognizing a hold
-var holdDelay = 500;
-// Indicates the user is currently holding the mouse down
-var holdActive = false;
-// MouseDown
-function onMouseDown(event){
-    // Do not take any immediate action - just set the holdStarter
-    //  to wait for the predetermined delay, and then begin a hold
-    holdStarter = setTimeout(function() {
-        holdStarter = null;
-        holdActive = true;
-        // begin hold-only operation here, if desired
-        
-    }, holdDelay);
-}
-// MouseUp
-function onMouseUp(event){
-    // If the mouse is released immediately (i.e., a click), before the
-    //  holdStarter runs, then cancel the holdStarter and do the click
-    if (holdStarter) {
-        clearTimeout(holdStarter);
-        // run click-only operation here
-    }
-    // Otherwise, if the mouse was being held, end the hold
-    else if (holdActive) {
-        holdActive = false;
-        // end hold-only operation here, if desired
-    }
-}
-
-
-function onMouseMove(event){
+function newTaskFunction(x,y,id_num, taskInfo) {
     
-}
-//End of Stack Exchange functions
-*/
-
-function newTaskFunction(x,y,id_num) {
-    
-   /* var button = document.createElement("DIV");
-    var buttonText = document.createTextNode("Created Task");
-    button.setAttribute('class', 'taskBox');
-    button.appendChild(buttonText);
-    document.body.appendChild(button);
-  */
   if (x==-1){
       x = 15;
       y = 582;
@@ -69,14 +26,38 @@ div.style.height = "100px";
 div.style.background = "yellow";
 div.style.color = "blue";
 div.setAttribute("id",id_num);
-
+div.innerHTML = taskInfo; 
 //window.alert(id_num.toString());
 
 document.body.appendChild(div);
 
 div.addEventListener('click', function(e) {
     if (wasDragged === false){
-        window.alert(e.target.getAttribute("id").toString());
+        //This block is for single click action
+        var boardID;
+        jQuery.ajax({
+            async: false,
+            type: "get",
+            url: "/tasks/ajax_show",
+            dataType: "json",
+            data: {id: id_num},
+            success: function(json){
+                boardID=parseInt(json.board_id,10);
+                window.location = `${json.board_id}/tasks/${id_num}`;
+            },
+            error: function(exception){alert("didn't fetch task correctly");}
+        });
+        
+        /*
+        jQuery.ajax({
+            type: "get",
+            url: "/boards/1/tasks/18",
+            
+            success: function(exception){},
+            error: function(exception){alert("didn't fetch task correctly");}
+        });*/
+        
+        
     }
     wasDragged = false;
 }, true);
@@ -91,7 +72,18 @@ div.addEventListener('mousedown', function(e) {
 }, true);
 
 document.addEventListener('mouseup', function() {
+    if (isDown){
+        jQuery.ajax({
+                    type: "post",
+                    url: "/tasks/update_pos",
+                    dataType: "text",
+                    data: {newX: parseInt(div.style.left,10), newY: parseInt(div.style.top, 10), id: id_num},
+                    success: function(exception){}, 
+                    error: function(exception){alert("Unable to save new position!");}
+                    });
+    }
     isDown = false;
+    
 }, true);
 
 document.addEventListener('mousemove', function(event) {

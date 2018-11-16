@@ -4,9 +4,10 @@
 <%= link_to 'Edit', edit_board_path(@board) %> |
 <%= link_to 'Back', boards_path %>
 <%= link_to 'AddRealTask', board_tasks_path(@board) %>
-<br>
 
-<button onclick="newTaskFunction(-1,-1,5)" type="button">New Task</button>
+<br>
+<%= button_to "New Task", new_board_task_path(@board), :method => "get" %>
+<!--<button onclick="newTaskFunction(-1,-1,5)" type="button">New Task</button> -->
 <br>
 
 <%= javascript_include_tag 'Kanban.js' %>
@@ -21,13 +22,11 @@
 <div style="width:225px; height:600px; padding-top: 10px;margin-left: 60%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Testing</div>
 <div style="width:225px; height:600px;  padding-top: 10px;margin-left: 80%; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Complete</div>
 
-<% @board.tasks.each do |item| %>
-        hello
-    <% end%>
+
 <!-- The following snippet demonstrates creating tasks through iteration, each with a different position -->
 <script>
     <% @board.tasks.each do |item| %>
-            newTaskFunction(-1,-1,<%=item.id%>)
+            newTaskFunction(<%=item.x%>,<%=item.y%>,<%=item.id%>, "<%=item.name%>")
     <% end%>
     
 </script>

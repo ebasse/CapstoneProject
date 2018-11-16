@@ -1,4 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+Name of Task: <br>
+<%= @task.name %>
+<br>
+Description of Task: <br>
+<%= @task.description %> <br>
+
+<%= link_to 'Edit', edit_board_task_path(@task) %> |
+<%= link_to 'Destroy', board_task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Back', board_tasks_path %>

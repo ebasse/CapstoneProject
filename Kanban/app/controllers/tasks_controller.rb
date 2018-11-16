@@ -5,12 +5,23 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.all
+    @board = Board.find(params[:board_id])
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
     @board = Board.find(params[:board_id])
+  end
+  
+  def ajax_show
+    @task = Task.find(params[:id])
+    ret = {'board_id' => @task.board_id}
+    respond_to do |format|
+      format.html
+      format.json { render json: ret }
+    end
+    
   end
 
   # GET /tasks/new
@@ -21,6 +32,8 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    @task = Task.find(params[:id])
+    @board = Board.find(@task.board_id)
   end
 
   # POST /tasks
@@ -28,6 +41,7 @@ class TasksController < ApplicationController
   def create
     @board = Board.find(params[:board_id])
     @task = @board.tasks.create(task_params)
+    @task.update_attributes(:x => -1, :y => -1)
     redirect_to board_path(@board)
 =begin
     respond_to do |format|
@@ -48,7 +62,7 @@ class TasksController < ApplicationController
     @board = Board.find(params[:board_id])
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to board_task_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -60,7 +74,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @board = Board.find(params[:board_id])
+    @board = Board.find(@task.board_id)
     @task.destroy
     respond_to do |format|
       format.html { redirect_to @board, notice: 'Task was successfully destroyed.' }
@@ -68,6 +82,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def update_pos
+    @task = Task.find(params[:id])
+    @task.update_attributes(:x => params[:newX], :y => params[:newY])
+    #@task.x = params[:x]
+    #@task.y = params[:y]
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
@@ -76,6 +97,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.fetch(:task, {})
+      params.require(:task).permit(:name, :description)
     end
 end
