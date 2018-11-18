@@ -9,8 +9,9 @@ function newTaskFunction(x,y,id_num, taskInfo) {
     
   if (x==-1){
       x = 10;
-      y = 20;
+      y = 30;
   }
+  
   var mousePosition;
 var offset = [0,0];
 var div;
@@ -35,8 +36,10 @@ div.addEventListener('click', function(e) {
     if (wasDragged === false){
         //This block is for single click action
         var boardID;
+        
+        //Make an AJAX cll to retrieve the board id of this task (need board id to go to correct url to
+        //display task)
         jQuery.ajax({
-            async: false,
             type: "get",
             url: "/tasks/ajax_show",
             dataType: "json",
@@ -47,15 +50,6 @@ div.addEventListener('click', function(e) {
             },
             error: function(exception){alert("didn't fetch task correctly");}
         });
-        
-        /*
-        jQuery.ajax({
-            type: "get",
-            url: "/boards/1/tasks/18",
-            
-            success: function(exception){},
-            error: function(exception){alert("didn't fetch task correctly");}
-        });*/
         
         
     }
@@ -73,13 +67,14 @@ div.addEventListener('mousedown', function(e) {
 
 document.addEventListener('mouseup', function() {
     if (isDown){
+        //When the task is released, update the position values in the database through AJAX call
         jQuery.ajax({
                     type: "post",
                     url: "/tasks/update_pos",
                     dataType: "text",
                     data: {newX: parseFloat(div.style.left), newY: parseFloat(div.style.top), id: id_num},
                     success: function(exception){}, 
-                    error: function(exception){alert("Unable to save new position!");}
+                    error: function(exception){}
                     });
     }
     isDown = false;
@@ -108,6 +103,9 @@ document.addEventListener('mousemove', function(event) {
     }
 }, true);
 
+
+//This function causes the board to update task positions every 300 milliseconds
+//Allows users to see changes made by other team members without having to refresh page
 window.setInterval(
     function(){
         
@@ -135,9 +133,9 @@ window.setInterval(
                     dataType: "text",
                     data: {newX: parseFloat(div.style.left), newY: parseFloat(div.style.top), id: id_num},
                     success: function(exception){}, 
-                    error: function(exception){alert("Unable to save new position!");}
+                    error: function(exception){}
                     });
         }
-    }, 300);
+    }, 3000);
 }
 //dragElement(document.getElementById("taskBox"));

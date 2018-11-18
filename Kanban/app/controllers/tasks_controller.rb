@@ -41,7 +41,7 @@ class TasksController < ApplicationController
   def create
     @board = Board.find(params[:board_id])
     @task = @board.tasks.create(task_params)
-    @task.update_attributes(:x => -1, :y => -1)
+    @task.update_attributes(:x => 10, :y => 30)
     redirect_to board_path(@board)
 =begin
     respond_to do |format|
