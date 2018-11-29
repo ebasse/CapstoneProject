@@ -1,41 +1,20 @@
-<%= bootstrap_devise_error_messages! %>
+<h1>Create Password</h1>
 
-<div class="panel panel-default">
-
-<div class="panel-heading">
-
-<h4>Create Password</h4>
-
-</div>
-
-<div class="panel-body">
-
-<%= form_for(resource, :as => resource_name, :url => update_user_confirmation_path,
-
-:html => { :method => :put, :class => "form login" }) do |f| %>
-
+<%= form_for(resource, as: resource_name, url: update_user_confirmation_path, html: { method: :put, :class => "form login" }) do |f| %>
 <%= hidden_field_tag :confirmation_token, @confirmation_token %>
+  <%= bootstrap_devise_error_messages! %>
 
-<div class="form-group">
+  <div class="form-group">
+    <%= f.label :password, :class => "control-label" %>
+    <%= f.password_field :password, :class => "form-control" %>
+  </div>
+  
+    <div class="form-group">
+    <%= f.label :password_confirmation, :class => "control-label" %>
+    <%= f.password_field :password_confirmation, :class => "form-control" %>
+  </div>
 
-<%= f.label :password, :class => "control-label" %>
-
-<%= f.password_field :password, :class => "form-control" %>
-
-</div>
-
-<div class="form-group">
-
-<%= f.label :password_confirmation, :class => "control-label" %>
-
-<%= f.password_field :password_confirmation, :class => "form-control" %>
-
-</div>
-
-<%= f.submit 'Create Password', class: "btn btn-primary" %>
-
+  <div class="form-group">
+    <%= f.submit 'Create Password', class: "btn btn-primary" %>
+  </div>
 <% end %>
-
-</div>
-
-</div>
