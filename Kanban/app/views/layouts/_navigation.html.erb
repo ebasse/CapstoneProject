@@ -11,7 +11,9 @@
           <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav col-md-6">
               <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "My Profile", edit_registration_path(current_user) %></li>
+              <li>
+                <%= link_to "<i class='fa fa-briefcase'></i> My Account".html_safe, edit_registration_path(current_user) %>
+              </li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
             <ul class="nav navbar-right col-md-4">
