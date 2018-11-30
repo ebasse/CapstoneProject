@@ -19,4 +19,16 @@ class UsersController < ApplicationController
             format.js { render partial: 'members/result' }
         end
     end
+    
+    def add_member
+        @member = User.find(params[:member])
+        current_user.memberships.build(member_id: @member.id)
+
+        if current_user.save
+            flash[:notice] = "Member was successfully added"
+        else
+            flash[:danger] = "There was something wrong with the member request"
+        end
+        redirect_to my_members_path
+    end
 end

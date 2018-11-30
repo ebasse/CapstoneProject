@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "user/registrations" }
   
   root 'welcome#index'
-  resources :users, only: [:show] #place holder to show board maybe
+  resources :users, only: [:show] #place holder to view board link maybe
   resources :memberships
   get 'my_members', to: 'users#my_members'
   get 'search_members', to: 'users#search'

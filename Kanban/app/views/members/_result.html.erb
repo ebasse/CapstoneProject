@@ -5,6 +5,7 @@
 <% end %>
 
 <% if @users %>
+  <% if @users.size > 0 %>
     <div id="member-lookup-results" class="well results-block col-md-10">
         <table class="search-results-table col-md-12">
             <tbody>
@@ -27,4 +28,5 @@
             </tbody>
         </table>
     </div>
+  <% end %>    
 <% end %>
