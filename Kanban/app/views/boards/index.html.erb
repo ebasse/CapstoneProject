@@ -1,6 +1,29 @@
-<p id="notice"><%= notice %></p>
+<head>
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<h1>Boards</h1>
+</head>
+<nav>
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Kanban Collab</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <!--<li class="active"><a href="#">Home</a></li>-->
+     
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+<h1 id="dashboardTitle">Dashboard</h1>
+<h1 align="center">My Projects</h1>
+<div id="horizontalLine"></div>
+
+
+<p id="notice"><%= notice %></p>
+<%= link_to '+ New Project', new_board_path %>
+<br><br>
 
 <table>
   <thead>
@@ -12,9 +35,10 @@
   <tbody>
     <% @boards.each do |board| %>
       <tr>
-        <td><%= link_to 'Show', board %></td>
-        <td><%= link_to 'Edit', edit_board_path(board) %></td>
-        <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= board.name %></td>
+        <td><%= link_to 'Show ',  board %> |</td>
+        <td><%= link_to 'Edit ',  edit_board_path(board) %> |  </td>
+        <td><%= link_to 'Delete',  board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +46,3 @@
 
 <br>
 
-<%= link_to 'New Board', new_board_path %>

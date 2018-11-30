@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Permanent+Marker" />
+  <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<nav>
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Kanban Collab</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/boards">Dashboard</a></li>
+     
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
 </head>
 <body>
 <div class = "title"><%= @board.name %></div>
 <p id="notice"><%= notice %></p>
-<div class = "center">
-<%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back', boards_path %>
-<%= button_to "New Task", new_board_task_path(@board), :method => "get" %>
+<!--<div class = "center">-->
+
+
+<div class="editBox">
+  <%= link_to 'Back', boards_path %> |
+  <%= link_to 'Edit Project', edit_board_path(@board) %>
 </div>
+
 <br>
 
 <!--<button onclick="newTaskFunction(-1,-1,5)" type="button">New Task</button> -->
-<br>
 
 <%= javascript_include_tag 'Kanban.js' %>
 <!--<div style="width:225px; height:600px; padding-top: 10px; margin-left: 60px; margin-top:25px; text-align: center; border:1px solid #000;position:absolute;">Backlog</div>
@@ -43,7 +64,7 @@ The styles below work independent of resolution
         <% end%>
     
     </script>
-    <div id = "backlog" class = "column">Backlog</div>
+    <div id = "backlog" class = "column">Backlog<br><br><%= button_to "+ New Task", new_board_task_path(@board), :method => "get" %></div>
     <div id = "toDo" class = "column">To Do</div>
     <div id = "inProgress" class = "column">In Progress</div>
     <div id = "testing" class = "column">Testing</div>
@@ -55,11 +76,3 @@ The styles below work independent of resolution
 </body>
 </html>
 
-
-<!--  websites for drag/drop help 
-
-https://codepen.io/retrofuturistic/pen/tlbHE 
-
-https://www.html5rocks.com/en/tutorials/dnd/basics/
-
--->

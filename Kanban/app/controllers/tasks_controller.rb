@@ -77,7 +77,7 @@ class TasksController < ApplicationController
     @board = Board.find(@task.board_id)
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to @board, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to @board, notice: 'Task was successfully deleted.' }
       format.json { head :no_content }
     end
   end

@@ -9,7 +9,7 @@ function newTaskFunction(x,y,id_num, taskInfo) {
     
   if (x==-1){
       x = 10;
-      y = 30;
+      y = 300;
   }
   
   var mousePosition;
@@ -17,15 +17,16 @@ var offset = [0,0];
 var div;
 var isDown = false;
 var wasDragged = false;
+var boardOffset = window.innerHeight - document.getElementById("board").getBoundingClientRect().top;
 
 div = document.createElement("div");
 div.style.position = "absolute";
 div.style.left = x + "%";
-div.style.top = y + "%";
+div.style.top = y+"px";
 div.style.width = "100px";
 div.style.height = "100px";
-div.style.background = "yellow";
-div.style.color = "blue";
+div.style.background = "#0085CA";
+div.style.color = "black";
 div.setAttribute("id",id_num);
 div.innerHTML = taskInfo; 
 div.style.zIndex = 10;
@@ -94,12 +95,14 @@ document.addEventListener('mousemove', function(event) {
 
         };
         div.style.left = (((mousePosition.x + offset[0])/window.innerWidth)*100) + '%';
-        div.style.top  = (((mousePosition.y + offset[1])/window.innerHeight)*100) + '%';
+        div.style.top  = mousePosition.y + offset[1] + 'px';
         //alert((document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100);
         //alert(div.style.top);
-        if (parseFloat(div.style.top) < parseFloat((document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100)){
-            div.style.top = (document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100 + '%';
-        }
+        
+        if (parseFloat(div.style.top) < 100){
+                div.style.top = 100 + 'px';
+            }
+        
     }
 }, true);
 
@@ -108,7 +111,8 @@ document.addEventListener('mousemove', function(event) {
 //Allows users to see changes made by other team members without having to refresh page
 window.setInterval(
     function(){
-        
+        console.log(div.style.top);
+        console.log(document.getElementById("board").getBoundingClientRect().top);
         if (isDown == false && wasDragged == false){
             jQuery.ajax({
             type: "get",
@@ -117,13 +121,13 @@ window.setInterval(
             data: {id: id_num},
             success: function(json){
                 div.style.left=json.new_x +'%';
-                div.style.top = json.new_y + '%';
+                div.style.top = json.new_y + 'px';
             },
             error: function(exception){
             }
         });
-            if (parseFloat(div.style.top) < parseFloat((document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100)){
-                div.style.top = (document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100 + '%';
+            if (parseFloat(div.style.top)< 100){
+                div.style.top = 100 + 'px';
             }
         }
         else{

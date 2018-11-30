@@ -1,6 +1,14 @@
-<h1>Editing Task</h1>
+<br><br><br><br><br>
+<div id = "editTaskBox">
+<br><br><br>
+<div class = "centerTitle" 
+<h1 align-text: "center">Editing Task</h1>
+</div>
 
+<div class = "centerText">
 <%= render 'form', task: @task %>
-
-<%= link_to 'Show', board_task_path(@task) %> |
-<%= link_to 'Back', :back %>
+<br><br>
+<%= link_to 'Back', :back %> |
+<%= link_to 'Show', board_task_path(@task) %>
+</div>
+</div>

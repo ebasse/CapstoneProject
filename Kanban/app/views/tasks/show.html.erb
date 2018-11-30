@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<br><br><br><br><br>
+<div id = "taskBox">
+<br><br><br><br><br>
 <div class = "centerTitle">Name of Task: </div>
 <br>
 <div class = "centerText"><%= @task.name %></div>
@@ -7,8 +10,25 @@
 <br>
 <div class = "centerText"><%= @task.description %></div> 
 <br>
+<% @task.comments.each do |comment| %>
+<p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
+
+<%= form_for([@board, @task, @task.comments.build]) do |f| %>
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<%end%>
 <div class = "centerText">
+<%= link_to 'Back', board_path(@board) %> |
 <%= link_to 'Edit', edit_board_task_path(@task) %> |
-<%= link_to 'Destroy', board_task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', board_path(@board) %>
+<%= link_to 'Delete', board_task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
 </div>

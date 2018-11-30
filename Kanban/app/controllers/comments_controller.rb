@@ -5,36 +5,46 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @comments = Comment.all
+    @task = Task.find(params[:task_id])
+    @board = Board.find(@task.board_id)
   end
 
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @task = Task.find(params[:task_id])
   end
 
   # GET /comments/new
   def new
+    @task = Task.find(params[:task_id])
     @comment = Comment.new
   end
 
   # GET /comments/1/edit
   def edit
+    @comment = Comment.find(params[:id])
+    @task = Task.find(@comment.task_id)
   end
 
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    
+    @task = Task.find(params[:task_id])
+    @board = Board.find(@task.board_id)
+    @comment = @task.comments.create(comment_params)
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to board_task_path(@board,@task), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /comments/1
@@ -69,6 +79,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.fetch(:comment, {})
+      params.require(:comment).permit(:body)
     end
 end

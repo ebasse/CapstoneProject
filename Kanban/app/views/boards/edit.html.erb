@@ -1,6 +1,14 @@
-<h1>Editing Board</h1>
+<br><br><br>
+<div id = "editBoard">
+    
+<div class = "centerTitle" >
+    <h1 align-text: "center">Editing Board</h1>
+</div>
 
+<div class = "centerText">
 <%= render 'form', board: @board %>
-
+<br><br>
 <%= link_to 'Show', @board %> |
-<%= link_to 'Back', boards_path %>
+<%= link_to 'Back', board_path %>
+</div>
+</div>

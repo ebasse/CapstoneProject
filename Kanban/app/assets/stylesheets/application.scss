@@ -13,15 +13,19 @@
  *= require_tree .
  *= require_self
  */
- /*.taskBox{*/
- /* position:absolute;*/
- /*     float: left;*/
- /*   width: 50px;*/
- /*   margin-left: 10px;*/
- /*   margin-top: 10px;*/
- /*   padding: 5px;*/
- /*   border: 2px solid black;*/
- /*}*/
+
 .center{
  text-align: center;
+}
+
+.centerFront{
+    text-align: center;
+    z-index: 50;
+}
+.container-fluid{
+    background-color: rgb(0,0,0);
+    
+}
+.navbar-brand{
+    color:rgb(0,133,202);
 }
