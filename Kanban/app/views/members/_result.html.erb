@@ -3,3 +3,28 @@
         <%= bootstrap_flash %>
     </div>
 <% end %>
+
+<% if @users %>
+    <div id="member-lookup-results" class="well results-block col-md-10">
+        <table class="search-results-table col-md-12">
+            <tbody>
+                <% @users.each do |user| %>
+                    <tr>
+                        <td><strong>Name:</strong> <%= user.full_name %></td>
+                        <td><strong>Email:</strong> <%= user.email %></td>
+                        <td><strong>Profile:</strong>
+                            <% if current_user.not_members_with?(user.id) %>
+                                <%= link_to "Add as a member", add_member_path(user: current_user, member: user), 
+                                        class: "btn btn-xs btn-success", method: :post %>
+                            <% else %>
+                                <span class="label label-primary">
+                                    You are members
+                                </span>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+<% end %>

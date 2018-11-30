@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :memberships
   get 'my_members', to: 'users#my_members'
   get 'search_members', to: 'users#search'
+  post 'add_member', to: 'users#add_member'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
