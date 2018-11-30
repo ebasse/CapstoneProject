@@ -4,6 +4,6 @@ class UsersController < ApplicationController
         
     #end
     def my_members
-
+        @memberships = current_user.members
     end
 end
