@@ -1,0 +1,38 @@
+<%= render 'members/lookup' %>
+
+<% if @memberships.size > 0 %>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th colspan="3" class="page-header">
+                    <h2>My Members</h2>
+                </th>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @memberships.each do |member| %>
+            <tr>
+                <td><%= member.full_name %></td>
+                <td><%= member.email %></td>
+                <td>
+                    <%= link_to "View Board", "#", class: "btn btn-primary btn-xs" %>
+                    <%= link_to "Remove Member", membership_path(member), method: :delete,
+                        data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger" %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% else %>
+    <div class="row col-lg-12">
+        <p class="lead">
+            You don't have any members yet, please add some!
+        </p>
+    </div>
+<% end %>
+
