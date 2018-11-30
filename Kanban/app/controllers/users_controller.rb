@@ -31,4 +31,7 @@ class UsersController < ApplicationController
         end
         redirect_to my_members_path
     end
+    
+    def show
+    end
 end
