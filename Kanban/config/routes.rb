@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
+  devise_for :users, :controllers => { :registrations => "user/registrations" }
+  
+  root 'welcome#index'
+  resources :users, only: [:show] #place holder to view board link maybe
+  resources :memberships
+  get 'my_members', to: 'users#my_members'
+  get 'search_members', to: 'users#search'
+  post 'add_member', to: 'users#add_member'
   get 'tutorial/index'
   resources :boards do
     resources :tasks do
@@ -14,15 +21,5 @@ end
    get 'tasks/ajax_show' => 'tasks#ajax_show'
    get 'tasks/get_pos' => 'tasks#get_pos'
    
-=======
-  devise_for :users, :controllers => { :registrations => "user/registrations" }
-  
-  root 'welcome#index'
-  resources :users, only: [:show] #place holder to view board link maybe
-  resources :memberships
-  get 'my_members', to: 'users#my_members'
-  get 'search_members', to: 'users#search'
-  post 'add_member', to: 'users#add_member'
->>>>>>> sly2.0
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
