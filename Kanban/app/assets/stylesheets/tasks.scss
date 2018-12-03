@@ -9,14 +9,15 @@
     a:visited{color: rgb(0,0,0);}
     a:hover{color: rgb(0,0,0);}
     a:active{color: rgb(0,0,0);}
+
 }
 
 #taskBox {
     background-color: #0085CA;
     padding: 10px;
     border: 3px solid black;
-    height: 400px;
-    width: 600px;
+    width: 50%;
+    height: 50%;;
     margin: auto;
 }
 
@@ -25,7 +26,7 @@
     background-color: #0085CA;
     padding: 10px;
     border: 3px solid black;
-    height: 400px;
-    width: 600px;
+    width: 60%;
+    height: 40%;
     margin: auto;
 }
