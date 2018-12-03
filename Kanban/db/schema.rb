@@ -15,8 +15,11 @@ ActiveRecord::Schema.define(version: 2018_11_29_222849) do
   create_table "boards", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.integer "owner_id"
+    t.integer "membership_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["membership_id"], name: "index_boards_on_membership_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -30,10 +33,10 @@ ActiveRecord::Schema.define(version: 2018_11_29_222849) do
 
   create_table "memberships", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "member_id"
+    t.integer "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_memberships_on_member_id"
+    t.index ["board_id"], name: "index_memberships_on_board_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
@@ -57,6 +60,7 @@ ActiveRecord::Schema.define(version: 2018_11_29_222849) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "current_board"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "first_name"

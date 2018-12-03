@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
     
-    #def method_name
-        
-    #end
     def my_members
-        @memberships = current_user.members
+        @board = Board.find(params[:board])
     end
     
     def search
@@ -16,20 +13,22 @@ class UsersController < ApplicationController
             flash.now[:danger] = "No users match this search criteria" if @users.blank?
         end
         respond_to do |format|
-            format.js { render partial: 'members/result' }
+            format.js { render partial: 'users/result' }
         end
     end
     
     def add_member
         @member = User.find(params[:member])
-        current_user.memberships.build(member_id: @member.id)
+        @user = User.find(params[:user])
+        @board=Board.find(@user.current_board)
+        @board.users << @member
 
         if current_user.save
             flash[:notice] = "Member was successfully added"
         else
             flash[:danger] = "There was something wrong with the member request"
         end
-        redirect_to my_members_path
+        redirect_to my_members_path(board: @board.id)
     end
     
     def show

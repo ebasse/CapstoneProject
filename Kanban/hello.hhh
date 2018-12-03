@@ -1,0 +1,14 @@
+digraph models_diagram {
+	graph[overlap=false, splines=true, bgcolor="none"]
+	"User" [shape=Mrecord, label="{User|id :integer\lemail :varchar\lencrypted_password :varchar\lreset_password_token :varchar\lreset_password_sent_at :datetime\lremember_created_at :datetime\lcurrent_board :integer\lcreated_at :datetime\lupdated_at :datetime\lfirst_name :varchar\llast_name :varchar\l}"]
+	"ApplicationRecord" []
+	"Membership" [shape=Mrecord, label="{Membership|id :integer\luser_id :integer\lboard_id :integer\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Comment" [shape=Mrecord, label="{Comment|id :integer\lbody :text\ltitle :varchar\ltask_id :integer\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Task" [shape=Mrecord, label="{Task|id :integer\lname :varchar\ldescription :text\lprogress :integer\lx :float\ly :float\lboard_id :integer\luser_id :integer\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Board" [shape=Mrecord, label="{Board|id :integer\lname :varchar\ldescription :text\lowner_id :integer\lmembership_id :integer\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"User" -> "Membership" [arrowtail=odot, arrowhead=crow, dir=both color="#C80B29"]
+	"User" -> "Board" [arrowtail=crow, arrowhead=crow, dir=both color="#3C4320"]
+	"Task" -> "Comment" [arrowtail=odot, arrowhead=crow, dir=both color="#7825C3"]
+	"Board" -> "Task" [arrowtail=odot, arrowhead=crow, dir=both color="#1F5412"]
+	"Board" -> "Membership" [arrowtail=odot, arrowhead=crow, dir=both color="#8DC4D3"]
+}

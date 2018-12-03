@@ -3,9 +3,9 @@
         <%= bootstrap_flash %>
     </div>
 <% end %>
-
 <% if @users %>
   <% if @users.size > 0 %>
+  
     <div id="member-lookup-results" class="well results-block col-md-10">
         <table class="search-results-table col-md-12">
             <tbody>
@@ -13,9 +13,11 @@
                     <tr>
                         <td><strong>Name:</strong> <%= user.full_name %></td>
                         <td><strong>Email:</strong> <%= user.email %></td>
+                        <%if true %>
                         <td><strong>Profile:</strong>
-                            <% if current_user.not_members_with?(user.id) %>
-                                <%= link_to "Add as a member", add_member_path(user: current_user, member: user), 
+                            <% if user.not_members_with?(params[:board]) %>
+                            <% to_pass = {:user => current_user,:member => user} %>
+                                <%= link_to "Add as a member", add_member_path(to_pass), 
                                         class: "btn btn-xs btn-success", method: :post %>
                             <% else %>
                                 <span class="label label-primary">
@@ -23,6 +25,7 @@
                                 </span>
                             <% end %>
                         </td>
+                        <% end %>
                     </tr>
                 <% end %>
             </tbody>

@@ -1,6 +1,10 @@
-<%= render 'members/lookup' %>
-
-<% if @memberships.size > 0 %>
+<%= render partial: 'users/lookup', locals: {board: @board.id} %>
+<% if current_user.current_board == nil
+        redirect_to root_path
+    else
+        @board = Board.find(current_user.current_board)
+    end %>
+<% if @board.users.count > 0 %>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -15,8 +19,9 @@
             </tr>
         </thead>
         <tbody>
-            <% @memberships.each do |member| %>
+            <% @board.users.each do |member| %>
             <tr>
+                <% if @board.owner_id != member.id %>
                 <td><%= member.full_name %></td>
                 <td><%= member.email %></td>
                 <td>
@@ -24,6 +29,7 @@
                     <%= link_to "Remove Member", membership_path(member), method: :delete,
                         data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger" %>
                 </td>
+                <% end %>
             </tr>
             <% end %>
         </tbody>

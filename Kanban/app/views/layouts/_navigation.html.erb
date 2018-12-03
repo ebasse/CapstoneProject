@@ -9,10 +9,31 @@
           </button>
           
           <div class="navbar-collapse collapse navbar-responsive-collapse">
+            
             <ul class="nav navbar-nav col-md-6">
+              <li>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      My Projects
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <% current_user.memberships.each do |f| %>
+                          <% if f.board %>
+                            <li>
+                              <%= link_to f.board.name, board_path(f.board) %>
+                            </li>
+                          <% else %>
+                            <% f.destroy %>
+                          <% end %>
+                        <% end %>
+                    </ul>
+                </div>
+              </li>
               <li><%= link_to "My Board", "/path1"  %></li>
               <li><%= link_to "<i class='fa fa-briefcase'></i> My Account".html_safe, edit_registration_path(current_user) %></li>
+              <% if false %>
               <li><%= link_to "<i class='fa fa-users'></i> Add Members".html_safe, my_members_path %></li>
+              <% end %>
             </ul>
             <ul class="nav navbar-right col-md-4">
               <li class="col-md-8 user-name text-right">

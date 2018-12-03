@@ -1,5 +1,6 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
+  before_action :user_is_member, only: [:show, :edit, :update, :destroy]
 
   # GET /boards
   # GET /boards.json
@@ -11,7 +12,9 @@ class BoardsController < ApplicationController
   # GET /boards/1.json
   def show
     @board = Board.find(params[:id])
+    current_user.current_board=params[:id]
   end
+  
 
   # GET /boards/new
   def new
@@ -21,17 +24,42 @@ class BoardsController < ApplicationController
   # GET /boards/1/edit
   def edit
   end
+  
+  def user_is_member
+    @board = Board.find(params[:id])
+    redirect_to root_path unless (@board.users.exists?(current_user.id))
+  end
+  
+  def add_member
+    @member = User.find(params[:member])
+        @board = Board.find(params[:board])
+        @board.users.new(@member)
+
+        if current_user.save
+            flash[:notice] = "Member was successfully added"
+        else
+            flash[:danger] = "There was something wrong with the member request"
+        end
+        redirect_to my_members_path
+  end
 
   # POST /boards
   # POST /boards.json
   def create
-    @board = Board.new(board_params)
+    
+    
+    
+    @board = Board.create(board_params)
+    @board.update_attributes(:owner_id => current_user.id)
+    @board.memberships.new(:user => User.find(current_user.id), :board => @board)
+    
 
     respond_to do |format|
       if @board.save
         format.html { redirect_to @board, notice: 'Board was successfully created.' }
         format.json { render :show, status: :created, location: @board }
       else
+        @membership.destroy
         format.html { render :new }
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end

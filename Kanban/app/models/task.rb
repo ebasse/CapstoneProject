@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-    has_many :comments
+    has_many :comments, dependent: :delete_all
     belongs_to :board
-    belongs_to :user
+    belongs_to :user, optional: true
 end

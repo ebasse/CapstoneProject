@@ -1,0 +1,12 @@
+digraph controllers_diagram {
+	graph[overlap=false, splines=true, bgcolor="none"]
+	"MembershipsController" [shape=Mrecord, label="{MembershipsController|add_member\lcreate\ldestroy\lnew\l|\l|_layout\l}"]
+	"TasksController" [shape=Mrecord, label="{TasksController|ajax_show\lcreate\ldestroy\ledit\lget_pos\lindex\lnew\lshow\lupdate\lupdate_pos\l|\l|_layout\lset_task\ltask_params\l}"]
+	"CommentsController" [shape=Mrecord, label="{CommentsController|create\ldestroy\ledit\lindex\lnew\lshow\lupdate\l|\l|_layout\lcomment_params\lset_comment\l}"]
+	"BoardsController" [shape=Mrecord, label="{BoardsController|add_member\lcreate\ldestroy\ledit\lindex\lnew\lshow\lupdate\luser_is_member\l|\l|_layout\lboard_params\lset_board\l}"]
+	"UsersController" [shape=Mrecord, label="{UsersController|add_member\lmy_members\lsearch\lshow\l|\l|_layout\l}"]
+	"TutorialController" [shape=Mrecord, label="{TutorialController|index\l|\l|_layout\l}"]
+	"User::RegistrationsController" [shape=Mrecord, label="{User::RegistrationsController|\l|configure_permitted_parameters\l|_layout\l}"]
+	"ApplicationController" [shape=Mrecord, label="{ApplicationController|\l|\l|_layout\l}"]
+	"WelcomeController" [shape=Mrecord, label="{WelcomeController|index\l|\l|_layout\l}"]
+}

@@ -1,5 +1,4 @@
 <h1>My Members</h1>
-
 <h3>Search for Members</h3>
 <div id="member-lookup">
   <%= form_tag search_members_path, remote: true, method: :get, id: 'member-lookup-form' do %>
@@ -19,5 +18,5 @@
   <% end %>
 </div>
 <div id="results">
-  <%= render 'members/result' %>
+  <%= render partial: 'users/result', locals: {board: @board.id} %>
 </div>

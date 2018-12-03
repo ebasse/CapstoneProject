@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Permanent+Marker" />
   <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -21,15 +22,20 @@
   </div>
 </nav>
 </head>
+-->
 <body>
+  <% current_user.update_attributes(:current_board => @board.id) %>
 <div class = "title"><%= @board.name %></div>
 <p id="notice"><%= notice %></p>
 <!--<div class = "center">-->
 
 
 <div class="editBox">
-  <%= link_to 'Back', boards_path %> |
-  <%= link_to 'Edit Project', edit_board_path(@board) %>
+  <%= link_to 'Back', boards_path %>
+  <% if current_user.id == @board.owner_id %> |
+  <%= link_to 'Edit Project', edit_board_path(@board) %> | 
+  <%= link_to 'Add_Members', my_members_path(board: @board.id) %>
+  <% end %>
 </div>
 
 <br>

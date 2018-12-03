@@ -4,8 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
-  has_many :memberships
-  has_many :members, through: :memberships
+  has_many :memberships       
+  has_many :boards, :through => :memberships
+  
   
   def full_name
     return "#{first_name} #{last_name}".strip if (first_name || last_name)
@@ -40,8 +41,8 @@ class User < ApplicationRecord
     users.reject { |user| user.id == self.id }
   end
   
-  def not_members_with?(member_id)
-    memberships.where(member_id: member_id).count < 1
+  def not_members_with?(board_id)
+    boards.find_by(:id => board_id) == nil
   end
   
 end
