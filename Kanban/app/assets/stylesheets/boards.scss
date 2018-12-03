@@ -16,10 +16,23 @@ td:nth-child(2) {
   padding-right: 4px;
 }
 
-
+.DashboardStyle{
+   background-image:linear-gradient(lightgrey, grey);
+}
 #dashboardTitle{
     text-align: center;
     font-size: 60px;
+}
+#BoardNmeStyle{
+    position:relative;
+    padding-left: 20px;
+    text-align: center;
+    
+}
+#BoardDeleteStyle, #BoardEditStyle, #BoardShowStyle{
+    display:inline-block;
+    text-align:center;
+    
 }
 
 #horizontalLine{
@@ -31,17 +44,38 @@ td:nth-child(2) {
     padding: 0;
 }
 
+.ExistingBoards{
+    border:3px solid #0085CA;
+    text-align: center;
+    width:250px;
+    height:250px;
+    display:inline-block;
+    margin:25px;
+    background-color:#101820;
+    color:white;
+    text-align: center;
+}
+
+.ExistingBoards:hover{
+    text-align: center;
+    background-color:#BFC0BF;
+}
 
 #board .column{
   
        background-color:rgb(191,192,191);
 }
+
 #board{
     position: absolute;
+<<<<<<< HEAD
        top: 250px;
+=======
+     top: 26.75%;
+    z-index: 2;
+>>>>>>> origin/david
     width: 100%;
     height: 100%;
-    z-index: 5;
     font-family: 'Arial';
     font-style: italic;
    font-size: 24px;
@@ -61,7 +95,22 @@ td:nth-child(2) {
     position:absolute;
 }
 
+#NewTaskButton{
+    position: relative;
+    max-width:15%;
+    z-index:1;
+    bottom:15%;
+    left:2%;
 
+}
+#NewProjectBttn{
+    font-size: 25px;
+    border:2px solid black;
+    width:15%;
+    left:2%;
+    position:relative;
+    padding-left: 0.75%;
+}
 
 #backlog{
     margin-left: 0%;
@@ -80,9 +129,14 @@ td:nth-child(2) {
 }
 
 .editBox{
-    border: 2px, solid, black;
+    height: 60px;
     text-align: center;
+    background-color: #000000;
+    border: 2px, solid, black;
     font-size: 30px;
+    position: relative;
+    vertical-align: center;
+    
 }
 
 .centerTitle{
@@ -102,13 +156,14 @@ td:nth-child(2) {
     background-color: #BFC0BF;
     padding: 10px;
     border: 3px solid black;
-    height: 550px;
-    width: 900px;
+    width: 40%;
+    height: 40%;
     margin: auto;
 }
 
 .button_to{
-    color: #bbbbbb;
-  width: 500px;
-  height: 100px;
+    color: black;
+    width: 500px;
+    height: 100px;
+    float: left;
 }
