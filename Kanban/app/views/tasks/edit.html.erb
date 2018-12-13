@@ -4,12 +4,16 @@
 <div class = "centerTitle" 
 <h1 align-text: "center">Editing Task</h1>
 </div>
-
+<br>
 <div class = "centerText">
 <%= render 'form', task: @task %>
 <br><br>
-<%= link_to 'Back', :back %> |
+<%= link_to 'Back', :back %>
+<% if false %>
+<!-- This block is redundant since back should take you to show screen -->
+|
 <%= link_to 'Show', board_task_path(@task) %>
+<% end %>
 <br>
 <br>
 <br>

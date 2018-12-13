@@ -1,11 +1,12 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
   before_action :user_is_member, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /boards
   # GET /boards.json
   def index
     @boards = Board.all
+    redirect_to root_path unless (current_user)
   end
 
   # GET /boards/1
@@ -56,10 +57,9 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.save
-        format.html { redirect_to @board, notice: 'Board was successfully created.' }
+        format.html { redirect_to @board}
         format.json { render :show, status: :created, location: @board }
       else
-        @membership.destroy
         format.html { render :new }
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
@@ -71,7 +71,7 @@ class BoardsController < ApplicationController
   def update
     respond_to do |format|
       if @board.update(board_params)
-        format.html { redirect_to @board, notice: 'Board was successfully updated.' }
+        format.html { redirect_to @board}
         format.json { render :show, status: :ok, location: @board }
       else
         format.html { render :edit }
@@ -83,9 +83,10 @@ class BoardsController < ApplicationController
   # DELETE /boards/1
   # DELETE /boards/1.json
   def destroy
+    @board = Board.find(params[:id])
     @board.destroy
     respond_to do |format|
-      format.html { redirect_to boards_url, notice: 'Board was successfully deleted.' }
+      format.html { redirect_to boards_url}
       format.json { head :no_content }
     end
   end

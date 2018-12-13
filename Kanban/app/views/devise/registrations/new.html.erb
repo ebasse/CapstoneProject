@@ -1,5 +1,7 @@
+<div id="SignInDiv">
+<br><br><br><br><br><br><br><br>
 <h1><%= t('.sign_up') %></h1>
-
+<br><br>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= bootstrap_devise_error_messages! %>
 
@@ -39,3 +41,4 @@
 <% end %>
 
 <%= render 'devise/shared/links' %>
+</div>

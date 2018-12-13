@@ -1,5 +1,5 @@
 Rails.application.config.assets.precompile += %w( Kanban.js )
-
+Rails.application.config.assets.precompile += %w( board.js )
 
 # Be sure to restart your server when you modify this file.
 

@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--
+
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Permanent+Marker" />
   <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<nav>
-   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Kanban Collab</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="/boards">Dashboard</a></li>
-     
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
-</nav>
-</head>
--->
+
 <body>
   <% current_user.update_attributes(:current_board => @board.id) %>
-<div class = "title"><%= @board.name %></div>
-<div class="editBox">
+<div class = "title">
+  <%= @board.name %>
+  </div>
+  
+<div id="editBox">
+  <br>
   <%= link_to 'Back', boards_path %>
   <% if current_user.id == @board.owner_id %> |
   <%= link_to 'Edit Project', edit_board_path(@board) %> | 
-  <%= link_to 'Add_Members', my_members_path(board: @board.id) %>
+  <%= link_to 'Add Members', my_members_path(board: @board.id) %>
   <% end %>
 </div>
-
+<br>
 <br>
 <p id="notice"><%= notice %></p>
 <!--<div class = "center">-->
 
 
 
-
-
 <%= javascript_include_tag 'Kanban.js' %>
 
 <div id= "board">
+  <br>
     <script>
         <% @board.tasks.each do |item| %>
                 newTaskFunction(<%=item.x%>,<%=item.y%>,<%=item.id%>, "<%=item.name%>")
         <% end%>
     </script>
-    <div id = "NewTaskButton"><%= button_to "+ New Task", new_board_task_path(@board), :method => "get" %></div>
-    <div id = "backlog" class = "column">Backlog<br><br></div>
+    <div id = "backlog" class = "column">Backlog<br><br>
+      <div id = "NewTaskButton"><%= button_to "+ New Task", new_board_task_path(@board), :method => "get", :form_class => "NewTaskButton"  %></div>
+    </div>
     <div id = "toDo" class = "column">To Do</div>
     <div id = "inProgress" class = "column">In Progress</div>
     <div id = "testing" class = "column">Testing</div>

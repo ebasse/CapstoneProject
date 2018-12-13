@@ -31,30 +31,48 @@ img.welcomeImage{
 
 .textContainer{
     position:absolute;
-    left:17%;
-    top:8%;
+    width: 100%;
+    top:3%;
     font-size:53px;
     color: #001958;
     text-align: center;
+    justify-content: center;
+    vertical-align: center;
+    
 }
 .textContainer h2{
     font-size:50px;
     padding-right: 20px;
+    text-align: center;
 }
 .textContainer h3{
     font-size:40px;
+    text-align: center;
 }
 #UNCC{
     color:#034627;
      text-align:center;
-      text-decoration:none;
-}
-#LogIn, #NewUser{
-    border-radius:6px;
-    
 }
 
-#LogIn:hover, #NewUser:hover{
+#LogIn{
+    border: 2px solid;
+    left:27.5%;
+    position: absolute;
+    top: 87%;
+    color: #001958;                                                                                                                                                          
+}
+
+.NewUser {
+    border: 2px solid;
+    left:50%;
+    position: absolute;
+    top: 87%;
+
+}
+
+
+#LogIn:hover, .NewUser:hover{
     background-color:white;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.25), 0 17px 50px 0 rgba(0,0,0,0.20);
+
 }

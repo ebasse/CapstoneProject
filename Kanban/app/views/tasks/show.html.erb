@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
-<br><br><br><br><br>
+<div id = "taskViewBackground">
+<br><br><br><br>
 <div id = "taskBox">
-<br><br><br><br><br>
+<br><br><br><br>
 <div class = "centerTitle">Name of Task: </div>
 <br>
 <div class = "centerText"><%= @task.name %></div>
@@ -34,5 +35,7 @@
 <%= link_to 'Back', board_path(@board) %> |
 <%= link_to 'Edit', edit_board_task_path(@task) %> |
 <%= link_to 'Delete', board_task_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+<br><br><br>
+</div>
 </div>
 </div>

@@ -9,7 +9,7 @@ function newTaskFunction(x,y,id_num, taskInfo) {
     
   if (x==-1){
       x = 10;
-      y = 300;
+      y = 80;
   }
   
   var mousePosition;
@@ -22,16 +22,18 @@ var boardOffset = window.innerHeight - document.getElementById("board").getBound
 div = document.createElement("div");
 div.style.position = "absolute";
 div.style.left = x + "%";
-div.style.top = y+"px";
-div.style.width = "100px";
+div.style.top = y + "px";
+div.style.width = "120px";
 div.style.height = "100px";
 div.style.background = "#0085CA";
 div.style.color = "black";
+div.style.border = "solid black 2px";
 div.setAttribute("id",id_num);
 div.innerHTML = taskInfo; 
 div.style.zIndex = 10;
 //window.alert(id_num.toString());
 document.getElementById("board").appendChild(div);
+div.style.wordBreak = "break-word";
 
 div.addEventListener('click', function(e) {
     if (wasDragged === false){
@@ -99,8 +101,8 @@ document.addEventListener('mousemove', function(event) {
         //alert((document.getElementById("board").getBoundingClientRect().top/window.innerHeight)*100);
         //alert(div.style.top);
         
-        if (parseFloat(div.style.top) < 100){
-                div.style.top = 100 + 'px';
+        if (parseFloat(div.style.top) < 150){
+                div.style.top = 150 + 'px';
             }
         
     }
@@ -126,8 +128,8 @@ window.setInterval(
             error: function(exception){
             }
         });
-            if (parseFloat(div.style.top)< 100){
-                div.style.top = 100 + 'px';
+            if (parseFloat(div.style.top)< 150){
+                div.style.top = 150 + 'px';
             }
         }
         else{
@@ -136,7 +138,7 @@ window.setInterval(
                     url: "/tasks/update_pos",
                     dataType: "text",
                     data: {newX: parseFloat(div.style.left), newY: parseFloat(div.style.top), id: id_num},
-                    success: function(exception){}, 
+                    success: function(){}, 
                     error: function(exception){}
                     });
         }

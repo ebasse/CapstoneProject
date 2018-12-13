@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
-  has_many :memberships       
-  has_many :boards, :through => :memberships
+  has_many :memberships, dependent: :delete_all       
+  has_many :boards, :through => :memberships, dependent: :delete_all
   
   
   def full_name

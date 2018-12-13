@@ -6,12 +6,15 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @board = Board.find(params[:board_id])
+
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
     @board = Board.find(params[:board_id])
+    # @board = Board.find(params[:id])
+    # @board = current_user.current_board=params[:board_id]
   end
   
   def ajax_show
@@ -32,17 +35,21 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @task = Task.find(params[:id])
     @board = Board.find(@task.board_id)
+    @task = Task.find(params[:id])
+
   end
 
   # POST /tasks
   # POST /tasks.json
+  
   def create
     @board = Board.find(params[:board_id])
     @task = @board.tasks.create(task_params)
-    @task.update_attributes(:x => 10, :y => 30)
+    @task.update_attributes(:x => 10, :y => 150)
     redirect_to board_path(@board)
+  
+  
 =begin
     respond_to do |format|
       if @task.save
@@ -77,13 +84,14 @@ class TasksController < ApplicationController
     @board = Board.find(@task.board_id)
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to @board, notice: 'Task was successfully deleted.' }
+      format.html { redirect_to @board }
       format.json { head :no_content }
     end
   end
   
   def get_pos
     @task = Task.find(params[:id])
+    @board = Board.find(@task.board_id)
     ret = {"new_x" => @task.x, "new_y" => @task.y}
     respond_to do |format|
       format.html
@@ -92,7 +100,9 @@ class TasksController < ApplicationController
   end
   
   def update_pos
+    print params
     @task = Task.find(params[:id])
+    @board = Board.find(@task.board_id)
     @task.update_attributes(:x => params[:newX], :y => params[:newY])
     #@task.x = params[:x]
     #@task.y = params[:y]

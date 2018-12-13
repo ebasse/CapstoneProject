@@ -1,24 +1,17 @@
 <head>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Permanent+Marker" />
     <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
-<nav>
-   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Kanban Collab</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <!--<li class="active"><a href="#">Home</a></li>-->
-     
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
-</nav>
+
 <body class="DashboardStyle">
+  <div class="DashboardHeader">
+  <!--<image id="DashboardImg" src="Project.png"></image>-->
 <h1 id="dashboardTitle">Dashboard</h1>
 <h1 align="center">My Projects</h1>
+  </div>
 <div id="horizontalLine"></div>
 
 
@@ -26,9 +19,10 @@
 &nbsp;
 &nbsp;
 &nbsp;
-<div id="NewProjectBttn"><%= link_to '+ New Project', new_board_path %></div>
+<container id="NewProjectBttn"><%= link_to '+ New Project', new_board_path %></container>
 <br><br>
 
+<%= javascript_include_tag 'board.js' %>
 <table>
   <thead>
     <tr>
@@ -37,19 +31,22 @@
   </thead>
   <div >
   <tbody>
-    <% @boards.each do |board| %>
-    <%= link_to board do %> <!-- HERE I TRIED TO MAKE EACH PHYSICAL BOARD CLICKABLE-->
-    <tr class="ExistingBoards">
-        <td id="BoardNmeStyle"><br>&nbsp;<%= board.name %><br><br><br><br><br><br><br></td>
-        <td id="BoardShowStyle"><%= link_to 'Show ',  board %> |</td>
-        <td id="BoardEditStyle"><%= link_to 'Edit ',  edit_board_path(board) %> | </td>
-        <td id="BoardDeleteStyle"><%= link_to 'Delete',  board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% current_user.boards.each do |board| %>
+     <!-- HERE I TRIED TO MAKE EACH PHYSICAL BOARD CLICKABLE-->
+    <tr class="ExistingBoards" data-id = <%=board.id%>>
+        <td id="BoardNmeStyle"><br><%= board.name %><br><br><br></td>
+        <td id="DashProjectShowStyle"><%= link_to 'Show ',  board %></td>
+        <% if board.owner_id == current_user.id %>
+        <td id="DashProjectEditStyle"> |<%= link_to 'Edit ',  edit_board_path(board) %> | </td>
+        <td id="DashProjectDeleteStyle"><%= link_to 'Delete',  board_path(board), :method => "delete", data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
-    <% end %>
     <% end %>
   </tbody>
   </div>
 </table>
-
+<script>
+  MakeBoardsClickable()
+</script>
 </body>
 

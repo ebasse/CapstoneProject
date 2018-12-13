@@ -37,10 +37,58 @@
 
 .nav.navbar-right li {
   .btn {
-    color: #fff !important;
+    // color: #fff !important;
     margin-top: 5%;
   }
   .btn-danger:hover {
     background-color: darken(#d9534f, 20%) !important;
   }
 }
+
+.nav.navbar-right li{
+  color: #fff;
+}
+#SignInDiv h1{
+  left: 10%;
+  
+}
+#SignInDiv{
+  position: relative;
+  width: 100%;
+  left: 24%;
+}
+.form-group{
+  width: 50%;
+  
+}
+
+#container{
+ background-image:linear-gradient(rgb(0,0,0), rgb(48,48,48)	);
+}
+
+.NavMyProjectBttn{
+  top: 14px;
+  position: relative;
+  border: none;
+  text-decoration: none;
+  background-color: inherit;
+  color: rgb(55,123,181);
+  font-size: 15px;
+}
+.NavMyProjectBttn:hover{
+  background-color: rgb(238,238,238);
+}
+.ProjectList{
+  background-color: inherit;
+  color: #337ab7;
+  height: 50px;
+  
+}
+.ProjectList:hover{
+    background-color: rgb(238,238,238);
+}
+.ProjectList:hover button{
+      color: rgb(50,103,138);
+
+}
+

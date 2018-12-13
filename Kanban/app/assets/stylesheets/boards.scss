@@ -5,15 +5,31 @@
     text-align: center;
     font-size: 60px;
     font-weight: bold;
-    font-family: 'Arial';
+    font-family: Permanent Marker;
     font-style: italic;
-        background-color:rgb(0,133,202);
-        position: relative;
+    background-color:rgb(0,133,202);
+    position: relative;
+}
+
+#editBox{
+    height: 10%;
+    text-align: center;
+    background-color:rgb(0,133,202);
+    border: 2px, solid, black;
+    font-size: 30px;
+    position: relative;
+    vertical-align: center;
+    padding-bottom: 10%;
+}
+#editBox a{
+    color: black;
+
+    
 }
 
 td:nth-child(2) {
-  padding-left: 4px;
-  padding-right: 4px;
+   padding-left: 4px;
+   padding-right: 4px;
 }
 
 .DashboardStyle{
@@ -23,13 +39,14 @@ td:nth-child(2) {
     text-align: center;
     font-size: 60px;
 }
-#BoardNmeStyle{
-    position:relative;
-    padding-left: 20px;
+.ExistingBoards #BoardNmeStyle{
     text-align: center;
-    
+    width: 250px;
+    position: relative;
+    font-size: 24px;
+    font-family: Permanent Marker;
 }
-#BoardDeleteStyle, #BoardEditStyle, #BoardShowStyle{
+#DashProjectDeleteStyle, #DashProjectEditStyle, #DashProjectShowStyle{
     display:inline-block;
     text-align:center;
     
@@ -45,39 +62,45 @@ td:nth-child(2) {
 }
 
 .ExistingBoards{
-    border:3px solid #0085CA;
+    font-size: 16px;
+    border: 3px solid #0085CA;
     text-align: center;
-    width:250px;
-    height:250px;
-    display:inline-block;
-    margin:25px;
-    background-color:#101820;
-    color:white;
-    text-align: center;
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+    margin: 25px;
+    background-color: #101820;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+
 .ExistingBoards:hover{
+    
     text-align: center;
     background-color:#BFC0BF;
 }
 
 #board .column{
   
-       background-color:rgb(191,192,191);
+    background-image:linear-gradient(lightgrey, grey);
+       
+       //rgb(191,192,191);
 }
 
 #board{
     position: absolute;
-     top: 26.75%;
+    top: 26%;
     z-index: 2;
     width: 100%;
     height: 100%;
     font-family: 'Arial';
     font-style: italic;
-   font-size: 24px;
-     font-variant: normal; 
-      font-weight: bold; 
-       line-height: 26px;
+    font-size: 24px;
+    font-variant: normal; 
+    font-weight: bold; 
+    line-height: 26px;
 }
 
 .column{
@@ -95,17 +118,30 @@ td:nth-child(2) {
     position: relative;
     max-width:15%;
     z-index:1;
-    bottom:15%;
-    left:2%;
+    top: 5px;
+    left: 18%;
+    font-size: 26px;
+    justify-content: center;
 
 }
 #NewProjectBttn{
     font-size: 25px;
-    border:2px solid black;
-    width:15%;
+    border:2px solid #428bca;
+    width:10%;
     left:2%;
     position:relative;
-    padding-left: 0.75%;
+    padding: 8px;
+    background-color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.container#NewProjectBttn:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
 }
 
 #backlog{
@@ -122,17 +158,6 @@ td:nth-child(2) {
 }
 #complete{
     margin-left: 80%;
-}
-
-.editBox{
-    height: 60px;
-    text-align: center;
-    background-color: #000000;
-    border: 2px, solid, black;
-    font-size: 30px;
-    position: relative;
-    vertical-align: center;
-    
 }
 
 .centerTitle{
@@ -159,7 +184,12 @@ td:nth-child(2) {
 
 .button_to{
     color: black;
-    width: 500px;
-    height: 100px;
     float: left;
+}
+
+#container{
+    background-color: white;
+    // position:relative;
+    width: 100%;
+
 }
